@@ -1,0 +1,74 @@
+body {
+
+	background-color: #669966;
+	font-family: "Arial", sans-serif;
+}
+
+h1 {
+
+	color : white;
+	font-size: 80px;
+	text-align: center;
+}
+
+h4 {
+	margin: 0px;
+}
+
+ul li span {
+	margin-left: 60px;
+	float: right;
+}
+
+ul li p {
+	margin: 0px;
+}
+
+ul li {
+	margin-bottom: 9px;
+}
+
+nav { /* all nav area */
+	text-align: center;
+}
+
+a { /* all links */
+
+	color: #15cb97;
+	font-weight: bold
+}
+
+nav a { /* all links in nav*/
+	color: orange;
+}
+
+a:hover {
+	color: red;
+}
+
+article {
+	color: white;
+	border: 1px solid white;
+	padding: 20px;
+	margin: 20px;
+}
+
+hr {
+	border-color: yellow;
+}
+
+li.past-job { /* all past-job classifications in all lis */
+	opacity: 0.6;
+}
+
+ul#education { /* all education ids in all uls */
+	text-decoration: underline;
+}
+
+ul li span {
+	color: orange;
+}
+
+div#footer_links {
+	text-align: center;
+}
