@@ -1,0 +1,74 @@
+ArduCopter.cpp:        sonar.set_estimated_terrain_height(height);
+ArduCopter.cpp:// read baro and sonar altitude at 10hz
+ArduCopter.cpp:    // read in sonar altitude
+ArduCopter.cpp:    sonar_alt           = read_sonar();
+Attitude.cpp:        target_sonar_alt = sonar_alt + current_alt_target - current_alt;
+Attitude.cpp:    // adjust sonar target alt if motors have not hit their limits
+Attitude.cpp:        target_sonar_alt += target_rate * dt;
+Attitude.cpp:    target_sonar_alt = constrain_float(target_sonar_alt,sonar_alt-pos_control.get_leash_down_z(),sonar_alt+pos_control.get_leash_up_z());
+Attitude.cpp:    // calc desired velocity correction from target sonar alt vs actual sonar alt (remove the error already passed to Altitude controller to avoid oscillations)
+Attitude.cpp:    distance_error = (target_sonar_alt - sonar_alt) - (current_alt_target - current_alt);
+Attitude.cpp:    velocity_correction = distance_error * g.sonar_gain;
+Attitude.cpp:    // return combined pilot climb rate + rate to correct sonar alt error
+control_althold.cpp:        if (sonar_enabled && (sonar_alt_health >= SONAR_ALT_HEALTH_MAX)) {
+control_althold.cpp:            // if sonar is ok, use surface tracking
+control_circle.cpp:    if (sonar_enabled && (sonar_alt_health >= SONAR_ALT_HEALTH_MAX)) {
+control_circle.cpp:        // if sonar is ok, use surface tracking
+control_land.cpp:    bool sonar_ok = sonar_enabled && (sonar.status() == RangeFinder::RangeFinder_Good);
+control_land.cpp:    bool sonar_ok = false;
+control_land.cpp:    // if we are above 10m and the sonar does not sense anything perform regular alt hold descent
+control_land.cpp:    if (pos_control.get_pos_target().z >= pv_alt_above_origin(LAND_START_ALT) && !(sonar_ok && sonar_alt_health >= SONAR_ALT_HEALTH_MAX)) {
+control_loiter.cpp:        if (sonar_enabled && (sonar_alt_health >= SONAR_ALT_HEALTH_MAX)) {
+control_loiter.cpp:            // if sonar is ok, use surface tracking
+control_poshold.cpp:        if (sonar_enabled && (sonar_alt_health >= SONAR_ALT_HEALTH_MAX)) {
+control_poshold.cpp:            // if sonar is ok, use surface tracking
+control_sport.cpp:        if (sonar_enabled && (sonar_alt_health >= SONAR_ALT_HEALTH_MAX)) {
+control_sport.cpp:            // if sonar is ok, use surface tracking
+Copter.cpp:    sonar_enabled(true),
+Copter.cpp:    sonar_alt(0),
+Copter.cpp:    sonar_alt_health(0),
+Copter.cpp:    target_sonar_alt(0.0f),
+GCS_Mavlink.cpp:    if (sonar.num_sensors() > 0) {
+GCS_Mavlink.cpp:        if (sonar.has_data()) {
+GCS_Mavlink.cpp:    // exit immediately if sonar is disabled
+GCS_Mavlink.cpp:    if (!sonar.has_data()) {
+GCS_Mavlink.cpp:            sonar.distance_cm() * 0.01f,
+GCS_Mavlink.cpp:            sonar.voltage_mv() * 0.001f);
+Log.cpp:    int16_t  desired_sonar_alt;
+Log.cpp:    int16_t  sonar_alt;
+Log.cpp:        desired_sonar_alt   : (int16_t)target_sonar_alt,
+Log.cpp:        sonar_alt           : sonar_alt,
+motors.cpp:        if (optflow.enabled() && !sonar.pre_arm_check()) {
+Parameters.cpp:    GSCALAR(sonar_gain,     "RNGFND_GAIN",           SONAR_GAIN_DEFAULT),
+Parameters.cpp:    GOBJECT(sonar,   "RNGFND", RangeFinder),
+precision_landing.cpp:    if (sonar_enabled && (sonar_alt_health >= SONAR_ALT_HEALTH_MAX)) {
+precision_landing.cpp:        final_alt = sonar_alt;
+sensors.cpp:void Copter::init_sonar(void)
+sensors.cpp:   sonar.init();
+sensors.cpp:// return sonar altitude in centimeters
+sensors.cpp:int16_t Copter::read_sonar(void)
+sensors.cpp:    sonar.update();
+sensors.cpp:    // exit immediately if sonar is disabled
+sensors.cpp:    if (sonar.status() != RangeFinder::RangeFinder_Good) {
+sensors.cpp:        sonar_alt_health = 0;
+sensors.cpp:    int16_t temp_alt = sonar.distance_cm();
+sensors.cpp:    if (temp_alt >= sonar.min_distance_cm() && 
+sensors.cpp:        temp_alt <= sonar.max_distance_cm() * SONAR_RELIABLE_DISTANCE_PCT) {
+sensors.cpp:        if ( sonar_alt_health < SONAR_ALT_HEALTH_MAX ) {
+sensors.cpp:            sonar_alt_health++;
+sensors.cpp:        sonar_alt_health = 0;
+sensors.cpp:    // correct alt for angle of the sonar
+switches.cpp:            // enable or disable the sonar
+switches.cpp:                sonar_enabled = true;
+switches.cpp:                sonar_enabled = false;
+system.cpp:    // initialise sonar
+system.cpp:    init_sonar();
+test.cpp:    {"rangefinder",         MENU_FUNC(test_sonar)},
+test.cpp:int8_t Copter::test_sonar(uint8_t argc, const Menu::arg *argv)
+test.cpp:	sonar.init();
+test.cpp:    cliSerial->printf_P(PSTR("RangeFinder: %d devices detected\n"), sonar.num_sensors());
+test.cpp:        sonar.update();
+test.cpp:        cliSerial->printf_P(PSTR("Primary: status %d distance_cm %d \n"), (int)sonar.status(), sonar.distance_cm());
+test.cpp:        (int)sonar._type[0], (int)sonar.status(0), sonar.distance_cm(0), (int)sonar._type[1], (int)sonar.status(1), sonar.distance_cm(1));
+tuning.cpp:        // set sonar gain
+tuning.cpp:        g.sonar_gain.set(tuning_value);
